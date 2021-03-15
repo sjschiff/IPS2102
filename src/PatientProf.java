@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 public class PatientProf {
     private String adminID;
     private String firstName;
@@ -10,15 +12,21 @@ public class PatientProf {
     private MedCond medCondInfo;
 
     public PatientProf(String adminID, String firstName, String lastName, String address, String phone, float coPay, String insuType, String patientType, MedCond medCondInfo) {
-        this.adminID = adminID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.coPay = coPay;
-        this.insuType = insuType;
-        this.patientType = patientType;
-        this.medCondInfo = medCondInfo;
+
+        if (Pattern.matches("PA\\d+", adminID)) {
+            this.adminID = adminID;
+        }else{
+            throw new RuntimeException("Admin ID must follow format: PA<number>");
+        }
+
+        updateFirstName(firstName);
+        updateLastName(lastName);
+        updateAddress(address);
+        updatePhone(phone);
+        updateCoPay(coPay);
+        updateInsuType(insuType);
+        updatePatientType(patientType);
+        updateMedCondInfo(medCondInfo);
     }
 
     public String getadminID() {
@@ -58,11 +66,20 @@ public class PatientProf {
     }
 
     public void updateFirstName(String firstName) {
-        this.firstName = firstName;
+        if (Pattern.matches("[a-zA-Z\\p{Blank}]+", firstName)){
+            this.firstName = firstName;
+        }else{
+            throw new RuntimeException("First names can only contain letters or spaces");
+        }
+
     }
 
     public void updateLastName(String lastName) {
-        this.lastName = lastName;
+        if (Pattern.matches("[a-zA-Z'\\p{Blank}]+", lastName)){
+            this.lastName = lastName;
+        }else{
+            throw new RuntimeException("Invalid last name");
+        }
     }
 
     public void updateAddress(String address) {
@@ -70,7 +87,12 @@ public class PatientProf {
     }
 
     public void updatePhone(String phone) {
-        this.phone = phone;
+        if (Pattern.matches("\\d{10}", phone)){
+            this.phone = phone;
+        }else{
+            throw new RuntimeException("Phone numbers should be 10 digits no characters");
+        }
+
     }
 
     public void updateCoPay(float coPay) {
@@ -78,11 +100,32 @@ public class PatientProf {
     }
 
     public void updateInsuType(String insuType) {
-        this.insuType = insuType;
+        switch(insuType){
+            case "Private":
+                this.insuType = "Private";
+                break;
+            case "Government":
+                this.insuType = "Government";
+                break;
+            default:
+                throw new RuntimeException("Insurance Type must be 'Private' or 'Government");
+        }
     }
 
     public void updatePatientType(String patientType) {
-        this.patientType = patientType;
+        switch(patientType){
+            case "Pediatric":
+                this.patientType = "Pediatric";
+                break;
+            case "Adult":
+                this.patientType = "Adult";
+                break;
+            case "Senior":
+                this.patientType = "Senior";
+                break;
+            default:
+                throw new RuntimeException("Patient Type must be 'Pediatric' or 'Adult' or 'Senior'");
+        }
     }
 
     public void updateMedCondInfo(MedCond medCondInfo) {
