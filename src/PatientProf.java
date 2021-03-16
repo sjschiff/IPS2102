@@ -111,7 +111,7 @@ public class PatientProf implements Serializable {
                 this.insuType = "Government";
                 break;
             default:
-                throw new RuntimeException("Insurance Type must be 'Private' or 'Government");
+                throw new RuntimeException("Insurance Type must be 'Private' or 'Government'");
         }
     }
 

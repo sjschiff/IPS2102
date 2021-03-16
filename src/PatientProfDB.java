@@ -93,6 +93,7 @@ public class PatientProfDB {
             while(fi.available() != 0){
                 PatientProf nextPatient = (PatientProf) oi.readObject();
                 patientList.add(nextPatient);
+                numPatient++;
             }
 
             oi.close();
