@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public class PatientProf {
+public class PatientProf implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String adminID;
     private String firstName;
     private String lastName;
