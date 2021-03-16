@@ -1,5 +1,7 @@
 import com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -66,6 +68,7 @@ public class PatientProfInterface {
                     break;
                 case 4:
                     System.out.println("Chose 4");
+                    updatePatientProf();
                     break;
                 case 5:
                     System.out.println("Chose 5");
@@ -188,6 +191,10 @@ public class PatientProfInterface {
 
         PatientProf profile = database.findProfile(adminID, lastName);
 
+        if (profile == null){
+            System.out.println("Profile does not exist");
+        }else {
+
 
             System.out.println("Please enter a number to choose an option listed below");
             System.out.println("1: Modify Address");
@@ -220,37 +227,74 @@ public class PatientProfInterface {
                 }
             }
 
-            System.out.print("Enter new value: ");
-            String newValue = in.nextLine();
+            boolean exit = false;
 
-            switch (selection) {
-                case 0:
+            do {
+                System.out.print("Enter new value: ");
+                String newValue = in.nextLine();
 
-                    break;
-                case 1:
+                switch (selection) {
+                    case 0:
+                        exit = true;
+                        break;
+                    case 1:
+                        try {
+                            profile.updateAddress(newValue);
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 2:
+                        try {
+                            profile.updatePhone(newValue);
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 3:
+                        try {
+                            profile.updateInsuType(newValue);
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 4:
+                        try {
+                            profile.updateCoPay(Float.parseFloat(newValue));
+                            exit = true;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Co-pay must be a number");
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 5:
+                        try {
+                            profile.updatePatientType(newValue);
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 6:
+                        //TODO: Implement update Medical Contact
+                        break;
+                    case 7:
+                        //TODO: Implement update Medical Contact Phone Number
+                        break;
+                    case 8:
+                        //TODO: Implement update Allergy Type
+                        break;
+                    case 9:
+                        //TODO: Implement update Illness Type
+                        break;
+                }
 
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-            }
-
-
-
-
+            } while (!exit);
+        }
 
     }
 
@@ -315,7 +359,12 @@ public class PatientProfInterface {
         System.out.println("Enter a filename:");
         String filename = in.nextLine();
 
-        database.initializeDatabase(filename);
+        try {
+            database.initializeDatabase(filename);
+        }catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void addNewPatient(){

@@ -100,11 +100,11 @@ public class PatientProfDB {
             fi.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Could not find file");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("IO Exception when trying to open file");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error when reading from file");
         }
 
     }
