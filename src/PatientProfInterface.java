@@ -330,8 +330,10 @@ public class PatientProfInterface {
         System.out.println("Insurance Type: " + profile.getInsuType());
         System.out.println("Patient Type: " + profile.getPatientType());
         System.out.println("Medical Condition Information");
-        //TODO: Print MedCond info
-
+        System.out.println("Medical Contact: " + profile.getMedCondInfo().getMdContact());
+        System.out.println("Number of Medical Contact: " + profile.getMedCondInfo().getMdPhone());
+        System.out.println("Known Allergies: " + profile.getMedCondInfo().getAlgType());
+        System.out.println("Known Illnesses: " + profile.getMedCondInfo().getIllType());
         System.out.print("Hit <ENTER> to continue...");
         in.nextLine();
 
