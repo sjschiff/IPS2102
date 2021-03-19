@@ -115,6 +115,8 @@ public class PatientProf implements Serializable {
         }
     }
 
+    // Update the Type of the Patient
+
     public void updatePatientType(String patientType) {
         switch(patientType){
             case "Pediatric":
