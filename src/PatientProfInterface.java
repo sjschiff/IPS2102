@@ -280,16 +280,36 @@ public class PatientProfInterface {
                         }
                         break;
                     case 6:
-                        //TODO: Implement update Medical Contact
+                        try {
+                            profile.updateMedCondInfo(MedCond.updateMdContact(newValue));
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     case 7:
-                        //TODO: Implement update Medical Contact Phone Number
+                        try {
+                            profile.updateMedCondInfo(MedCond.updateMdPhone(newValue));
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     case 8:
-                        //TODO: Implement update Allergy Type
+                        try {
+                            profile.updateMedCondInfo(MedCond.updateAlgType(newValue));
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     case 9:
-                        //TODO: Implement update Illness Type
+                        try {
+                            profile.updateMedCondInfo(MedCond.updateIllType(newValue));
+                            exit = true;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
                 }
 

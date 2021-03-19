@@ -133,7 +133,8 @@ public class PatientProf implements Serializable {
         }
     }
 
-    public void updateMedCondInfo(MedCond medCondInfo) {
+    public void updateMedCondInfo(MedCond medCondInfo){
         this.medCondInfo = medCondInfo;
     }
+
 }
