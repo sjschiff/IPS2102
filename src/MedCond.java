@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public class MedCond {
+public class MedCond implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String mdContact;
     private String mdPhone;
     private String algType;
@@ -45,11 +48,44 @@ public class MedCond {
     }
 
     public void updateAlgType(String algType) {
-        this.algType = algType;
+        switch(algType){
+            case "None":
+                this.algType = "None";
+                break;
+            case "Food":
+                this.algType = "Food";
+                break;
+            case "Medication":
+                this.algType = "Medication";
+                break;
+            case "Other":
+                this.algType = "Other";
+                break;
+            default:
+                throw new RuntimeException("Allergy type must be 'None', 'Food', 'Medication' or 'Other'");
+        }
     }
 
     public void updateIllType(String illType) {
-        this.illType = illType;
+        switch(illType){
+            case "None":
+                this.illType = "None";
+                break;
+            case "CHD":
+                this.illType = "CHD";
+                break;
+            case "Diabetes":
+                this.illType = "Diabetes";
+                break;
+            case "Asthma":
+                this.illType = "Asthma";
+                break;
+            case "Other":
+                this.illType = "Other";
+                break;
+            default:
+                throw new RuntimeException("Illness type must be 'None', 'CHD', 'Diabetes', 'Asthma' or 'Other'");
+        }
     }
 
 }

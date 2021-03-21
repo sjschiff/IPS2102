@@ -6,12 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PatientProfTest {
 
     private PatientProf testProfile;
-
+    MedCond testMedCondInfo;
     @BeforeEach
     public void setUp(){
-        MedCond medCondInfo = null;
+
+        testMedCondInfo = new MedCond("John Smith", "5555555555", "None", "None");
         testProfile = new PatientProf("PA1", "John", "Smith",
-                "UConn", "5555555555", 100, "Private", "Adult", medCondInfo);
+                "UConn", "5555555555", 100, "Private", "Adult", testMedCondInfo);
     }
 
     @Test
@@ -73,10 +74,9 @@ class PatientProfTest {
         assertEquals(testProfile.getPatientType(), "Adult");
     }
 
-    //TODO: Do this test when MedCond is finished
     @Test
     void getMedCondInfo() {
-        assertNull(testProfile.getMedCondInfo());
+        assertEquals(testMedCondInfo, testProfile.getMedCondInfo());
     }
 
     @Test
@@ -195,9 +195,10 @@ class PatientProfTest {
 
     }
 
-    //TODO: Create this test when MedCond is finished
     @Test
     void updateMedCondInfo() {
-        fail();
+        MedCond newInfo = new MedCond("John", "5555555555", "None", "None");
+        testProfile.updateMedCondInfo(newInfo);
+        assertEquals(newInfo, testProfile.getMedCondInfo());
     }
 }

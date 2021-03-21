@@ -9,10 +9,11 @@ public class PatientProfInterface {
 
     private PatientProfDB database;
     private Scanner in;
+    private String filename;
 
     PatientProfInterface(String filename){
         this.database = new PatientProfDB(filename);
-
+        this.filename = filename;
     }
 
     public void getUserChoice(){
@@ -281,7 +282,8 @@ public class PatientProfInterface {
                         break;
                     case 6:
                         try {
-                            profile.updateMedCondInfo(MedCond.updateMdContact(newValue));
+                            MedCond medCondInfo = profile.getMedCondInfo();
+                            medCondInfo.updateMdContact(newValue);
                             exit = true;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
@@ -289,7 +291,8 @@ public class PatientProfInterface {
                         break;
                     case 7:
                         try {
-                            profile.updateMedCondInfo(MedCond.updateMdPhone(newValue));
+                            MedCond medCondInfo = profile.getMedCondInfo();
+                            medCondInfo.updateMdPhone(newValue);
                             exit = true;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
@@ -297,7 +300,8 @@ public class PatientProfInterface {
                         break;
                     case 8:
                         try {
-                            profile.updateMedCondInfo(MedCond.updateAlgType(newValue));
+                            MedCond medCondInfo = profile.getMedCondInfo();
+                            medCondInfo.updateAlgType(newValue);
                             exit = true;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
@@ -305,7 +309,8 @@ public class PatientProfInterface {
                         break;
                     case 9:
                         try {
-                            profile.updateMedCondInfo(MedCond.updateIllType(newValue));
+                            MedCond medCondInfo = profile.getMedCondInfo();
+                            medCondInfo.updateIllType(newValue);
                             exit = true;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
@@ -337,7 +342,6 @@ public class PatientProfInterface {
         System.out.print("Hit <ENTER> to continue...");
         in.nextLine();
 
-
     }
 
     public void displayAllPatientProf(){
@@ -368,25 +372,15 @@ public class PatientProfInterface {
     }
 
     public void writeToDB(){
-        System.out.println("Enter a filename to write to: ");
-
-        String filename = in.nextLine();
-
         database.writeAllPatientProf(filename);
-
     }
 
     public void initDB(){
-
-        System.out.println("Enter a filename:");
-        String filename = in.nextLine();
-
         try {
             database.initializeDatabase(filename);
         }catch (RuntimeException e){
             System.out.println(e.getMessage());
         }
-
     }
 
     public void addNewPatient(){
@@ -429,7 +423,7 @@ public class PatientProfInterface {
             } catch (NumberFormatException e) {
                 valid = false;
                 System.out.println("Invalid Input: ");
-                System.out.println("Co-pay must be a number. Please Try again. ");
+                System.out.println("Co-pay must be a number.");
             } catch (RuntimeException e) {
                 valid = false;
                 System.out.println("Invalid Input: ");
@@ -441,13 +435,67 @@ public class PatientProfInterface {
     }
 
     public MedCond createNewMedCond(){
-        return null;
+        MedCond rv = new MedCond("NULL","0000000000","None", "None");
+        System.out.println("Fill in the Medical information for the patient below");
+        boolean valid = false;
+
+        do {
+            try {
+                System.out.print("Medical Contact: ");
+                String mdContact = in.nextLine();
+                rv.updateMdContact(mdContact);
+                valid = true;
+            } catch (RuntimeException e) {
+                System.out.println("Invalid Input: ");
+                System.out.println(e.getMessage());
+            }
+        }while(!valid);
+
+        valid = false;
+        do {
+            try {
+                System.out.print("Medical Contact Phone Number: ");
+                String mdPhone = in.nextLine();
+                rv.updateMdPhone(mdPhone);
+                valid = true;
+            } catch (RuntimeException e) {
+                System.out.println("Invalid Input: ");
+                System.out.println(e.getMessage());
+            }
+        }while(!valid);
+
+        valid = false;
+        do {
+            try {
+                System.out.print("Allergy Type: ");
+                String algType = in.nextLine();
+                rv.updateAlgType(algType);
+                valid = true;
+            } catch (RuntimeException e) {
+                System.out.println("Invalid Input: ");
+                System.out.println(e.getMessage());
+            }
+        }while(!valid);
+
+        valid = false;
+        do {
+            try {
+                System.out.print("Illness Type: ");
+                String illType = in.nextLine();
+                rv.updateIllType(illType);
+                valid = true;
+            } catch (RuntimeException e) {
+                System.out.println("Invalid Input: ");
+                System.out.println(e.getMessage());
+            }
+        }while(!valid);
+
+        return rv;
     }
 
     public static void main(String[] args){
-        PatientProfInterface test = new PatientProfInterface("file");
+        PatientProfInterface test = new PatientProfInterface("database.txt");
         test.getUserChoice();
-
     }
 
 }
