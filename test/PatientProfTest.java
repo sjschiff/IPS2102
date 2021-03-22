@@ -3,10 +3,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Test class for PatientProf
 class PatientProfTest {
 
-    private PatientProf testProfile;
-    MedCond testMedCondInfo;
+    private PatientProf testProfile;        // PatientProf to be used in each test
+    MedCond testMedCondInfo;                // MedCond to be used in each test
+
+    // setUp method to initialize the testProfile and testMedCondInfo before each test
     @BeforeEach
     public void setUp(){
 
@@ -15,70 +18,83 @@ class PatientProfTest {
                 "UConn", "5555555555", 100, "Private", "Adult", testMedCondInfo);
     }
 
+    // Tests the constructor
     @Test
     void testConstructor(){
-        MedCond medCondInfo = null;
         PatientProf profile = null;
 
+        // Ensure that the adminID check in the constructor only excepts the format PA<#>
+        // This instantiation should throw a RuntimeException
         try {
             profile = new PatientProf("123", "Sam", "Schiffer",
-                    "UConn", "5551234567", 500, "Private", "Adult", medCondInfo);
+                    "UConn", "5551234567", 500, "Private", "Adult", testMedCondInfo);
             fail();
         }catch (RuntimeException e){
             assertNull(profile);
         }
 
+        // This instantiation should succeed
         profile = new PatientProf("PA1", "Sam", "Schiffer",
-                "UConn", "5551234567", 500, "Private", "Adult", medCondInfo);
+                "UConn", "5551234567", 500, "Private", "Adult", testMedCondInfo);
         assertNotNull(profile);
 
     }
 
+    // Tests getadminID gets the correct value
     @Test
     void getadminID() {
         assertEquals(testProfile.getadminID(), "PA1");
     }
 
+    // Tests getFirstName gets the correct value
     @Test
     void getFirstName() {
         assertEquals(testProfile.getFirstName(), "John");
     }
 
+    // Tests getLastName gets the correct value
     @Test
     void getLastName() {
         assertEquals(testProfile.getLastName(), "Smith");
     }
 
+    // Tests getAddress gets the correct value
     @Test
     void getAddress() {
         assertEquals(testProfile.getAddress(), "UConn");
     }
 
+    // Tests getPhone gets the correct value
     @Test
     void getPhone() {
         assertEquals(testProfile.getPhone(), "5555555555");
     }
 
+    // Tests getCoPay gets the correct value
     @Test
     void getCoPay() {
         assertEquals(testProfile.getCoPay(), 100);
     }
 
+    // Tests getInsuType gets the correct value
     @Test
     void getInsuType() {
         assertEquals(testProfile.getInsuType(), "Private");
     }
 
+    // Tests getPatientType gets the correct value
     @Test
     void getPatientType() {
         assertEquals(testProfile.getPatientType(), "Adult");
     }
 
+    // Tests getMedCondInfo gets the correct value
     @Test
     void getMedCondInfo() {
         assertEquals(testMedCondInfo, testProfile.getMedCondInfo());
     }
 
+    // Tests updateFirstName to ensure the checks work
     @Test
     void updateFirstName() {
         // Try a first name that has special characters
@@ -98,6 +114,7 @@ class PatientProfTest {
         assertEquals(testProfile.getFirstName(), "saMuel");
     }
 
+    // Test updateLastName to ensure the checks work
     @Test
     void updateLastName() {
         // Try a last name with special characters
@@ -114,6 +131,7 @@ class PatientProfTest {
 
     }
 
+    // Tests that updateAddress works
     @Test
     void updateAddress() {
         // Try updating the address
@@ -121,9 +139,10 @@ class PatientProfTest {
         assertEquals(testProfile.getAddress(), "96 Huskyville Road");
     }
 
+    // Test updatePhone to ensure the checks work
     @Test
     void updatePhone() {
-        // Try a phone number with slahes
+        // Try a phone number with slashes
         try {
             testProfile.updatePhone("555-555-0000");
             fail();
@@ -131,9 +150,17 @@ class PatientProfTest {
             assertEquals(testProfile.getPhone(), "5555555555");
         }
 
-        //Try using letters
+        // Try using letters
         try {
             testProfile.updatePhone("eight zero zero eight");
+            fail();
+        } catch (RuntimeException e){
+            assertEquals(testProfile.getPhone(), "5555555555");
+        }
+
+        // Try a 9 digit phone number
+        try {
+            testProfile.updatePhone("555888555");
             fail();
         } catch (RuntimeException e){
             assertEquals(testProfile.getPhone(), "5555555555");
@@ -145,6 +172,7 @@ class PatientProfTest {
 
     }
 
+    // Test that updateCoPay works
     @Test
     void updateCoPay() {
         // Try updating the copay
@@ -152,6 +180,7 @@ class PatientProfTest {
         assertEquals(testProfile.getCoPay(), 300000);
     }
 
+    // Test updateInsuType to ensure the checks work
     @Test
     void updateInsuType() {
         // Try using an invalid type
@@ -171,6 +200,7 @@ class PatientProfTest {
         assertEquals(testProfile.getInsuType(), "Private");
     }
 
+    // Test updatePatientType to ensure the checks work
     @Test
     void updatePatientType() {
         //Try using an invalid type
@@ -195,6 +225,7 @@ class PatientProfTest {
 
     }
 
+    // Test that updateMedCondInfo works
     @Test
     void updateMedCondInfo() {
         MedCond newInfo = new MedCond("John", "5555555555", "None", "None");
