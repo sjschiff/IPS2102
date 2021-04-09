@@ -545,7 +545,7 @@ public class PatientProfInterface {
     // Creates an instance of the PatientProfInterface with the database file
     // Then calls the method to get the user's choices
     public static void main(String[] args){
-        PatientProfInterface test = new PatientProfInterface("database.txt");
+        PatientProfInterface test = new PatientProfInterface("demo.txt");
         test.getUserChoice();
     }
 
