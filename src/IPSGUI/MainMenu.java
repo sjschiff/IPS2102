@@ -10,7 +10,7 @@ public class MainMenu extends JFrame implements ActionListener{
     JButton select;
 
     public MainMenu(){
-        title = new JLabel("Integrated Patient System");
+        title = new JLabel("Integrated Patient System", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 25));
 
         create = new JRadioButton("Create Profile");
@@ -21,7 +21,6 @@ public class MainMenu extends JFrame implements ActionListener{
 
         select = new JButton("Select");
 
-        title.setHorizontalAlignment(JLabel.CENTER);
 
         create.setHorizontalAlignment(JLabel.CENTER);
         delete.setHorizontalAlignment(JLabel.CENTER);
