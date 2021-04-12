@@ -21,7 +21,7 @@ public class CreateProfile extends JFrame {
         header.add(title);
 
         // Create body panel with grid layout for 12 inputs and 2 components per input
-        body = new JPanel(new GridLayout(12,2));
+        body = new JPanel(new GridLayout(12,2,0,5));
 
             // Arrays to hold choices for drop boxes
         String insuTypes[] = {"Private", "Government"};
