@@ -47,6 +47,35 @@ public class DeleteProfile extends JFrame {
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,10));
         setVisible(true);
+
+        new DeleteStatus("Profile Deleted");
+    }
+
+    // Class to create a pop-up for the status of the delete
+    private class DeleteStatus extends JFrame{
+        JLabel title, message;
+        JButton ok;
+
+        public DeleteStatus(String status){
+
+            // Create the title
+            title = new JLabel("Delete Profile", JLabel.CENTER);
+            title.setFont(new Font("Serif", Font.PLAIN, 25));
+
+            // Create the status message
+            message = new JLabel(status, JLabel.CENTER);
+
+            // Create the OK button
+            ok = new JButton("OK");
+
+            add(title);
+            add(message);
+            add(ok);
+
+            setSize(400, 400);
+            setLayout(new GridLayout(3,0,0,10));
+            setVisible(true);
+        }
     }
 
     public static void main(String[] args){
