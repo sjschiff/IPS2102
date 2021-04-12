@@ -48,13 +48,20 @@ public class MainMenu extends JFrame implements ActionListener{
 
         add(select);
 
+        select.addActionListener(this);
+
         setSize(400, 500);
         setLayout(new GridLayout(7,0));
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e){
-
+        System.out.println(e.getSource());
+        System.out.println(e.paramString());
+        System.out.println(e.getActionCommand());
+        System.out.println(e.getModifiers());
+        System.out.println(e.getClass());
+        System.out.println(e.getWhen());
     }
 
     public static void main(String[] args){
