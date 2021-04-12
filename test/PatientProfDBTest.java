@@ -1,13 +1,16 @@
+import backend.MedCond;
+import backend.PatientProf;
+import backend.PatientProfDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Class to test the PatientProfDB
+// Class to test the Backend.PatientProfDB
 class PatientProfDBTest {
-    // PatientProfDB used for testing
+    // Backend.PatientProfDB used for testing
     private PatientProfDB testdb;
-    // MedCond used for testing
+    // Backend.MedCond used for testing
     private static final MedCond medCondInfo = new MedCond("John Doe", "5555555555", "None", "None");
     // 3 PatientProfiles that are added and used for testing the database
     private static final PatientProf prof1 = new PatientProf("PA1", "John", "Smith",

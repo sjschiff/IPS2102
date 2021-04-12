@@ -1,3 +1,5 @@
+package backend;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -42,8 +44,8 @@ public class PatientProfDB {
     }
 
     // Takes in an adminID and the lastName of a patient
-    // Returns the PatientProf from the database if it can be found
-    // Returns null if the PatientProf is not in the database
+    // Returns the Backend.PatientProf from the database if it can be found
+    // Returns null if the Backend.PatientProf is not in the database
     public PatientProf findProfile(String adminID, String lastName){
         for (PatientProf patient : patientList){
             if (patient.getadminID().equals(adminID)){
@@ -56,8 +58,8 @@ public class PatientProfDB {
     }
 
     // Takes an adminID of an administrator
-    // Finds the PatientProf with the lowest index that has that adminID and sets the currentPatientIndex to that index
-    // Returns the PatientProf that was found or null if there are no PatientProf's with that adminID
+    // Finds the Backend.PatientProf with the lowest index that has that adminID and sets the currentPatientIndex to that index
+    // Returns the Backend.PatientProf that was found or null if there are no Backend.PatientProf's with that adminID
     public PatientProf findFirstProfile(String adminID){
         for (int i = 0; i<patientList.size(); i++){
             if(patientList.get(i).getadminID().equals(adminID)){
@@ -69,8 +71,8 @@ public class PatientProfDB {
     }
 
     // Using the currentPatientIndex, finds which adminID is currently being searched
-    // and returns the next PatientProf in the database with the same adminId
-    // Also sets the currentPatientIndex to the index of the found PatientProf
+    // and returns the next Backend.PatientProf in the database with the same adminId
+    // Also sets the currentPatientIndex to the index of the found Backend.PatientProf
     public PatientProf findNextProfile(){
         String currentAdminId = patientList.get(currentPatientIndex).getadminID();
         for (int i = currentPatientIndex + 1; i<patientList.size(); i++){
@@ -82,7 +84,7 @@ public class PatientProfDB {
         return null;
     }
 
-    // Writes all the PatientProf in the database to the file at filename
+    // Writes all the Backend.PatientProf in the database to the file at filename
     // Throws Exceptions if the file can not be found or there is an IO error
     public void writeAllPatientProf(String filename){
 

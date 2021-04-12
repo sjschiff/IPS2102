@@ -1,3 +1,5 @@
+package backend;
+
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public class MedCond implements Serializable {
     private String algType;                             // Allergy type of the patient
     private String illType;                             // Known Illnesses of the patient
 
-    // Constructor for MedCond
+    // Constructor for Backend.MedCond
     // Takes in values for each attribute except serialVersionUID
     // Calls the corresponding update methods that ensure the input is valid
     public MedCond(String mdContact, String mdPhone, String algType, String illType) {

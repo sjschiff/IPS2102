@@ -1,3 +1,5 @@
+package backend;
+
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class PatientProf implements Serializable {
     private float coPay;                                // Patient's copay amount
     private String insuType;                            // Patient's type of insurance
     private String patientType;                         // Patient's type
-    private MedCond medCondInfo;                        // MedCond object that holds Medical Condition information
+    private MedCond medCondInfo;                        // Backend.MedCond object that holds Medical Condition information
 
     // Constructor method, takes in values for each attribute except serialVersionUID
     // Calls the corresponding update methods which ensures each value is valid
@@ -76,7 +78,7 @@ public class PatientProf implements Serializable {
         return patientType;
     }
 
-    // Getter that returns the MedCond object
+    // Getter that returns the Backend.MedCond object
     public MedCond getMedCondInfo() {
         return medCondInfo;
     }
@@ -158,7 +160,7 @@ public class PatientProf implements Serializable {
         }
     }
 
-    // Updates the MedCond object for this PatientProf
+    // Updates the Backend.MedCond object for this Backend.PatientProf
     public void updateMedCondInfo(MedCond medCondInfo){
         this.medCondInfo = medCondInfo;
     }

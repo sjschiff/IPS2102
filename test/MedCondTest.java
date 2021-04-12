@@ -1,13 +1,14 @@
+import backend.MedCond;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Tests the MedCond class
+// Tests the Backend.MedCond class
 class MedCondTest {
-    MedCond medCondInfo;        // MedCond used for testing
+    MedCond medCondInfo;        // Backend.MedCond used for testing
 
-    // setUp function to initialize the MedCond used for testing
+    // setUp function to initialize the Backend.MedCond used for testing
     @BeforeEach
     void setUp(){
         medCondInfo = new MedCond("Carrie Anne","8005558000", "None", "None");

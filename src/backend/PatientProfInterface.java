@@ -1,14 +1,12 @@
-import com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport;
+package backend;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 // Class for user interface
 public class PatientProfInterface {
 
-    private PatientProfDB database;         // The PatientProfDB used for backend database management
+    private PatientProfDB database;         // The Backend.PatientProfDB used for backend database management
     private Scanner in;                     // Scanner object used to scan user input
     private String filename;                // filename that is used to store database information
 
@@ -158,7 +156,7 @@ public class PatientProfInterface {
             }
         }while(!valid);
 
-        // Get the PatientProf from the database using the given information
+        // Get the Backend.PatientProf from the database using the given information
         PatientProf profile = database.findProfile(adminID, lastName);
 
         // If the profile could be found display all patient information
@@ -342,7 +340,7 @@ public class PatientProfInterface {
 
     }
 
-    // Takes in a PatientProf and displays all of the data contained
+    // Takes in a Backend.PatientProf and displays all of the data contained
     private void displayPatientProf(PatientProf profile){
 
         // Print out all data and then wait for a newLine to move on the next screen
@@ -420,7 +418,7 @@ public class PatientProfInterface {
     }
 
     // Prompts the user for all of the information needed to create a new PatientProfile
-    // Returns the newly created PatientProf
+    // Returns the newly created Backend.PatientProf
     public PatientProf createNewPatientProf(){
         boolean valid;                      // condition that the input is valid
         PatientProf newPatient = null;      // The newPatient to be returned
@@ -470,10 +468,10 @@ public class PatientProfInterface {
         return newPatient;
     }
 
-    // Prompts the user for all the information needed to create a MedCond object
-    // Returns a new MedCond object
+    // Prompts the user for all the information needed to create a Backend.MedCond object
+    // Returns a new Backend.MedCond object
     public MedCond createNewMedCond(){
-        // Create a new MedCond with dummy values that will be updated
+        // Create a new Backend.MedCond with dummy values that will be updated
         MedCond rv = new MedCond("NULL","0000000000","None", "None");
 
         System.out.println("Fill in the Medical information for the patient below");
@@ -537,12 +535,12 @@ public class PatientProfInterface {
             }
         }while(!valid);
 
-        // Return the new MedCond object
+        // Return the new Backend.MedCond object
         return rv;
     }
 
     // Main method to actually start up the user interface
-    // Creates an instance of the PatientProfInterface with the database file
+    // Creates an instance of the Backend.PatientProfInterface with the database file
     // Then calls the method to get the user's choices
     public static void main(String[] args){
         PatientProfInterface test = new PatientProfInterface("demo.txt");

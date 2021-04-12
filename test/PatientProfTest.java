@@ -1,13 +1,15 @@
+import backend.MedCond;
+import backend.PatientProf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Test class for PatientProf
+// Test class for Backend.PatientProf
 class PatientProfTest {
 
-    private PatientProf testProfile;        // PatientProf to be used in each test
-    MedCond testMedCondInfo;                // MedCond to be used in each test
+    private PatientProf testProfile;        // Backend.PatientProf to be used in each test
+    MedCond testMedCondInfo;                // Backend.MedCond to be used in each test
 
     // setUp method to initialize the testProfile and testMedCondInfo before each test
     @BeforeEach
