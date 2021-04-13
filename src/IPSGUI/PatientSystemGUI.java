@@ -19,6 +19,8 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     UpdateProfile updateProfile;
     DisplayPrompt displayPrompt;
     DisplayProfile currentDisplayProfile;
+    DisplayAllProfiles displayAllProfiles;
+    PatientProf curProfile;
 
     public PatientSystemGUI(){
         mainMenu = new MainMenu(this);
@@ -26,6 +28,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         deleteProfile = new DeleteProfile(this);
         updateProfile = new UpdateProfile(this);
         displayPrompt = new DisplayPrompt(this);
+        displayAllProfiles = new DisplayAllProfiles(this);
 
         startUp();
     }
@@ -34,7 +37,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     public void startUp(){
 
         // Create a new object to choose a file
-        JFileChooser fc = new JFileChooser("C:\\Users\\samsc\\Documents\\UCONN\\CSE2102\\RealProjects\\IPS2102");
+        JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
         boolean valid = false;
         // Keep trying to choose and open a file until it works with a valid file or user hits CANCEL
         while(!valid) {
@@ -67,12 +70,16 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         if(e.getSource()==displayPrompt.getSearch()){
             handleDisplayProfile();
         }
+        if(e.getSource()==displayAllProfiles.getSearch()){
+            handleDisplayAllProfiles();
+        }
         if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getExit()){
             handleDisplayProfileExit();
         }
         if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getNext()){
-            System.out.println("Next selected");
+            handledDisplayProfileNext();
         }
+
     }
 
     // Method to handle clicking select in MainMenu
@@ -97,6 +104,8 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
                 displayPrompt.setVisible(true);
                 break;
             case "displayAll":
+                mainMenu.setVisible(false);
+                displayAllProfiles.setVisible(true);
                 break;
         }
     }
@@ -116,10 +125,46 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
     }
 
+    // Method to handle displaying all of the profiles when "Search" is clicked
+    // Gets the adminID that the user and will display all of the patients under that adminID
+    // Sends an ErrorBox error message if adminID has no patients
+    private void handleDisplayAllProfiles(){
+        String adminID = displayAllProfiles.getData();
+        PatientProf nextProfile;
+        curProfile = database.findFirstProfile(adminID);
+        if (curProfile == null){
+            new ErrorBox("Admin ID has no patients");
+        } else{
+            nextProfile = database.findNextProfile();
+            if (nextProfile == null){
+                displayAllProfiles.hideScreen();
+                currentDisplayProfile = new DisplayProfile(this, curProfile, true);
+            } else{
+                displayAllProfiles.hideScreen();
+                currentDisplayProfile = new DisplayProfile(this, curProfile, false);
+                curProfile = nextProfile;
+            }
+        }
+    }
+
     // Handle hitting the exit button from displaying a profile. Returns the user to the main menu.
     private void handleDisplayProfileExit(){
         currentDisplayProfile.setVisible(false);
         mainMenu.setVisible(true);
+    }
+
+    // Handle hitting the next button from displaying a profile. Attempts to find the next profile and
+    // creates another displayProfile window with the correct button, "Next" or "Exit"
+    private void handledDisplayProfileNext(){
+        PatientProf nextProfile = database.findNextProfile();
+        if (nextProfile == null){
+            currentDisplayProfile.setVisible(false);
+            currentDisplayProfile = new DisplayProfile(this, curProfile, true);
+        } else{
+            currentDisplayProfile.setVisible(false);
+            currentDisplayProfile = new DisplayProfile(this, curProfile, false);
+            curProfile = nextProfile;
+        }
     }
 
     public static void main(String[] args){
