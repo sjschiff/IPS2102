@@ -46,6 +46,7 @@ public class UpdateProfile extends JFrame {
         // Create footer panel
         footer = new JPanel();
         find = new JButton("Find");
+        find.addActionListener(listener);
         footer.add(find);
 
         // Add different panels and set this frame to visible
@@ -59,51 +60,26 @@ public class UpdateProfile extends JFrame {
 
     }
 
-    private class UpdateInfo extends JFrame{
-        JPanel header, body, footer;
-        JLabel title, adminID, lastName, updateField;
-        JTextField updateFieldtxt;
+    // Returns the JButton object of find
+    public JButton getFind(){
+        return find;
+    }
 
-        JButton submit;
+    // Method to return the data that the user has entered into the fields.
+    public String[] getData(){
+        String adminID = adminIDtxt.getText();
+        String lastName = lastNametxt.getText();
+        String updateField = (String)updateFieldDrop.getSelectedItem();
+        String[] data = {adminID, lastName, updateField};
+        return data;
+    }
 
-        public UpdateInfo(String id, String lName, String uField){
-            // Create header panel and add the title
-            header = new JPanel(new GridLayout(3,1));
-            title = new JLabel("Update", JLabel.CENTER);
-            title.setFont(new Font("Serif", Font.PLAIN, 25));
-
-            adminID = new JLabel("Admin ID - " + id, JLabel.CENTER);
-            lastName = new JLabel("Last Name - " + lName, JLabel.CENTER);
-
-            header.add(title);
-            header.add(adminID);
-            header.add(lastName);
-
-            // Create body panel with grid layout for 1 inputs and 2 components per input
-            body = new JPanel(new GridLayout(1,2,0,30));
-
-                // Create label and input for update field
-            updateField = new JLabel(uField + ":", JLabel.CENTER);
-            updateFieldtxt = new JTextField();
-
-                // add these components to the body
-            body.add(updateField);
-            body.add(updateFieldtxt);
-
-            // Create footer panel
-            footer = new JPanel();
-            submit = new JButton("Find");
-            footer.add(submit);
-
-            // Add different panels and set this frame to visible
-            add(header);
-            add(body);
-            add(footer);
-
-            setSize(400, 500);
-            setLayout(new GridLayout(3,0,0,10));
-            //setVisible(true);
-        }
+    // Method to hide this screen and clear what has been entered in the text fields
+    public void hideScreen(){
+        setVisible(false);
+        adminIDtxt.setText("");
+        lastNametxt.setText("");
+        updateFieldDrop.setSelectedIndex(0);
     }
 
     public static void main(String[] args){

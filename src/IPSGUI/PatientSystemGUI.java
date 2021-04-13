@@ -18,6 +18,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     DeleteProfile deleteProfile;
     DeleteStatus deleteStatus;
     UpdateProfile updateProfile;
+    UpdateInfo updateInfo;
     DisplayPrompt displayPrompt;
     DisplayProfile currentDisplayProfile;
     DisplayAllProfiles displayAllProfiles;
@@ -77,6 +78,14 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
         if(deleteStatus != null && e.getSource()==deleteStatus.getOK()){
             handleDeleteOK();
+        }
+
+        if (e.getSource()==updateProfile.getFind()){
+            handleUpdateProfile();
+        }
+
+        if (updateInfo != null && e.getSource()==updateInfo.getSubmit()){
+            handleUpdateInfo();
         }
 
         if(e.getSource()==displayPrompt.getSearch()){
@@ -162,6 +171,84 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     private void handleDeleteOK(){
         deleteStatus.setVisible(false);
         mainMenu.setVisible(true);
+    }
+
+    // Method to handle hitting find in UpdateProfile
+    private void handleUpdateProfile(){
+        String[] data = updateProfile.getData();
+        String adminID = data[0];
+        String lastName = data[1];
+        String uInfo = data[2];
+        PatientProf patient = database.findProfile(data[0], data[1]);
+        if (patient != null){
+            updateProfile.hideScreen();
+            updateInfo = new UpdateInfo(this, adminID, lastName, uInfo);
+        } else{
+            new ErrorBox("Patient Could Not Be Found");
+        }
+    }
+
+    private void handleUpdateInfo(){
+        boolean valid = false;
+        String[] data = updateInfo.getData();
+        String adminID = data[0];
+        String lastName = data[1];
+        String uField = data[2];
+        String newVal = data[3];
+        PatientProf profile = database.findProfile(adminID, lastName);
+
+        // TODO: Error checking in updates for bad inputs
+        try {
+            switch (uField) {
+                case "Address":
+                    profile.updateAddress(newVal);
+                    valid = true;
+                    break;
+                case "Phone Number":
+                    profile.updatePhone(newVal);
+                    valid = true;
+                    break;
+                case "Insurance Type":
+                    profile.updateInsuType(newVal);
+                    valid = true;
+                    break;
+                case "Co-pay":
+                    profile.updateCoPay(Float.parseFloat(newVal));
+                    valid = true;
+                    break;
+                case "Patient Type":
+                    profile.updatePatientType(newVal);
+                    valid = true;
+                    break;
+                case "Medical Contact":
+                    profile.getMedCondInfo().updateMdContact(newVal);
+                    valid = true;
+                    break;
+                case "Medical Contact Phone Number":
+                    profile.getMedCondInfo().updateMdPhone(newVal);
+                    valid = true;
+                    break;
+                case "Allergy Type":
+                    profile.getMedCondInfo().updateAlgType(newVal);
+                    valid = true;
+                    break;
+                case "Illness Type":
+                    profile.getMedCondInfo().updateIllType(newVal);
+                    valid = true;
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            new ErrorBox("Co-pay must be a number.");
+        } catch (RuntimeException e) {
+            new ErrorBox(e.getMessage());
+        }
+
+        if (valid) {
+            updateInfo.hideScreen();
+            mainMenu.setVisible(true);
+        }
+
+
     }
 
     // Method to handle finding and displaying one profile
