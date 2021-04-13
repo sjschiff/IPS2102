@@ -67,6 +67,10 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
         }
+        if(e.getSource()==createProfile.getSubmit()){
+            handleCreateProfile();
+        }
+
         if(e.getSource()==displayPrompt.getSearch()){
             handleDisplayProfile();
         }
@@ -107,6 +111,24 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
                 mainMenu.setVisible(false);
                 displayAllProfiles.setVisible(true);
                 break;
+        }
+    }
+
+    // Method to handle hitting "Submit" in createProfile screen
+    // Tries to receive a profile and if any exceptions are caught, creates a new ErrorBox
+    // showing the error message to the user
+    private void handleCreateProfile(){
+        PatientProf profile;
+        try{
+            profile = createProfile.getProfile();
+            database.insertNewProfile(profile);
+            createProfile.hideScreen();
+            mainMenu.setVisible(true);
+        } catch (NumberFormatException e){
+            new ErrorBox("Co-pay must be a number.");
+        }
+        catch(RuntimeException e){
+            new ErrorBox(e.getMessage());
         }
     }
 

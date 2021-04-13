@@ -1,5 +1,8 @@
 package IPSGUI;
 
+import backend.MedCond;
+import backend.PatientProf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -103,6 +106,64 @@ public class CreateProfile extends JFrame {
 
     public JButton getSubmit(){
         return submit;
+    }
+
+    // Takes the MedCond input from the user and returns a new MedCond object with that data
+    // Does not do any exception handling
+    private MedCond getMedCondInfo(){
+        String contact, phone, algType, illType;
+        MedCond rv;
+
+        contact = mdContacttxt.getText();
+        phone = mdPhonetxt.getText();
+        algType = (String)algTypeDrop.getSelectedItem();
+        illType = (String)illTypeDrop.getSelectedItem();
+
+        rv = new MedCond(contact, phone, algType, illType);
+
+        return rv;
+    }
+
+    // Takes all of the input from the user, then creates and returns a new PatientProf
+    // Does not do any exception handling
+    public PatientProf getProfile(){
+        String adminID, firstName, lastName, address, phone, insuType, patientType;
+        float coPay;
+        MedCond medCondInfo;
+
+        medCondInfo = getMedCondInfo();
+
+        adminID = adminIDtxt.getText();
+        firstName = firstNametxt.getText();
+        lastName = lastNametxt.getText();
+        address = addresstxt.getText();
+        phone = phonetxt.getText();
+        coPay = Float.parseFloat(coPaytxt.getText());
+        insuType = (String)insuTypeDrop.getSelectedItem();
+        patientType = (String)patientTypeDrop.getSelectedItem();
+
+        PatientProf rv = new PatientProf(adminID, firstName, lastName, address, phone, coPay, insuType, patientType, medCondInfo);
+
+        return rv;
+    }
+
+    // Method to hide this screen and clear all of the input areas to default
+    public void hideScreen(){
+        setVisible(false);
+
+        adminIDtxt.setText("");
+        firstNametxt.setText("");
+        lastNametxt.setText("");
+        addresstxt.setText("");
+        phonetxt.setText("");
+        coPaytxt.setText("");
+        insuTypeDrop.setSelectedIndex(0);
+        patientTypeDrop.setSelectedIndex(0);
+        mdContacttxt.setText("");
+        mdPhonetxt.setText("");
+        algTypeDrop.setSelectedIndex(0);
+        illTypeDrop.setSelectedIndex(0);
+
     }
 
     public static void main(String[] args){

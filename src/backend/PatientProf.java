@@ -22,7 +22,7 @@ public class PatientProf implements Serializable {
     public PatientProf(String adminID, String firstName, String lastName, String address, String phone, float coPay, String insuType, String patientType, MedCond medCondInfo) {
 
         // Use pattern matching to ensure that the adminID follows the correct format
-        if (Pattern.matches("PA\\d+", adminID)) {
+        if (adminID != null && Pattern.matches("PA\\d+", adminID)) {
             this.adminID = adminID;
         }else{
             throw new RuntimeException("Admin ID must follow format: PA<number>");
