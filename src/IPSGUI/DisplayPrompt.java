@@ -51,6 +51,24 @@ public class DisplayPrompt extends JFrame {
         //setVisible(true);
     }
 
+    public JButton getSearch(){
+        return search;
+    }
+
+    // Method to return the data that the user has entered into the text fields.
+    public String[] getData(){
+        String adminID = adminIDtxt.getText();
+        String lastName = lastNametxt.getText();
+        String[] data = {adminID, lastName};
+        return data;
+    }
+
+    public void hideScreen(){
+        setVisible(false);
+        adminIDtxt.setText("");
+        lastNametxt.setText("");
+    }
+
     public static void main(String[] args){
         //new DisplayPrompt();
     }

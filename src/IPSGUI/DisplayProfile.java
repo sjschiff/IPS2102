@@ -1,17 +1,23 @@
 package IPSGUI;
 
+import backend.MedCond;
+import backend.PatientProf;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class DisplayProfile extends JFrame {
     // Declare all the components that need to be used
-    JPanel header, body, footer;
-    JLabel title, adminID, firstName, lastName, address, phone, coPay, insuType, patientType, mdContact, mdPhone, algType, illType,
+    private JPanel header, body, footer;
+    private JLabel title, adminID, firstName, lastName, address, phone, coPay, insuType, patientType, mdContact, mdPhone, algType, illType,
             adminIDtxt, firstNametxt, lastNametxt, addresstxt, phonetxt, coPaytxt, insuTypetxt, patientTypetxt, mdContacttxt, mdPhonetxt, algTypetxt, illTypetxt;
 
-    JButton next;
+    private JButton next, exit;
 
-    public DisplayProfile(){
+    public DisplayProfile(ActionListener listener, PatientProf profile, boolean last){
+        MedCond medCondInfo = profile.getMedCondInfo();
+
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
         title = new JLabel("Patient Profile", JLabel.CENTER);
@@ -23,29 +29,29 @@ public class DisplayProfile extends JFrame {
 
             // Create the labels for each input
         adminID = new JLabel("Admin ID:", JLabel.CENTER);
-        adminIDtxt = new JLabel("", JLabel.CENTER);
+        adminIDtxt = new JLabel(profile.getadminID(), JLabel.CENTER);
         firstName = new JLabel("First Name:", JLabel.CENTER);
-        firstNametxt = new JLabel("", JLabel.CENTER);
+        firstNametxt = new JLabel(profile.getFirstName(), JLabel.CENTER);
         lastName = new JLabel("Last Name:", JLabel.CENTER);
-        lastNametxt = new JLabel("", JLabel.CENTER);
+        lastNametxt = new JLabel(profile.getLastName(), JLabel.CENTER);
         address = new JLabel("Address:", JLabel.CENTER);
-        addresstxt = new JLabel("", JLabel.CENTER);
+        addresstxt = new JLabel(profile.getAddress(), JLabel.CENTER);
         phone = new JLabel("Phone:", JLabel.CENTER);
-        phonetxt = new JLabel("", JLabel.CENTER);
+        phonetxt = new JLabel(profile.getPhone(), JLabel.CENTER);
         coPay = new JLabel("Co-Pay:", JLabel.CENTER);
-        coPaytxt = new JLabel("", JLabel.CENTER);
+        coPaytxt = new JLabel(String.valueOf(profile.getCoPay()), JLabel.CENTER);
         insuType = new JLabel("Insurance Type:", JLabel.CENTER);
-        insuTypetxt = new JLabel("", JLabel.CENTER);
+        insuTypetxt = new JLabel(profile.getInsuType(), JLabel.CENTER);
         patientType = new JLabel("Patient Type:", JLabel.CENTER);
-        patientTypetxt = new JLabel("", JLabel.CENTER);
+        patientTypetxt = new JLabel(profile.getPatientType(), JLabel.CENTER);
         mdContact = new JLabel("Md Contact", JLabel.CENTER);
-        mdContacttxt = new JLabel("", JLabel.CENTER);
+        mdContacttxt = new JLabel(medCondInfo.getMdContact(), JLabel.CENTER);
         mdPhone = new JLabel("Md Phone:", JLabel.CENTER);
-        mdPhonetxt = new JLabel("", JLabel.CENTER);
+        mdPhonetxt = new JLabel(medCondInfo.getMdPhone(), JLabel.CENTER);
         algType = new JLabel("Allergies:", JLabel.CENTER);
-        algTypetxt = new JLabel("", JLabel.CENTER);
+        algTypetxt = new JLabel(medCondInfo.getAlgType(), JLabel.CENTER);
         illType = new JLabel("Illnesses:", JLabel.CENTER);
-        illTypetxt = new JLabel("", JLabel.CENTER);
+        illTypetxt = new JLabel(medCondInfo.getIllType(), JLabel.CENTER);
 
             // Add each component to the body in order
         body.add(adminID);
@@ -76,7 +82,16 @@ public class DisplayProfile extends JFrame {
         // Create footer panel
         footer = new JPanel();
         next = new JButton("Next Profile");
-        footer.add(next);
+        next.addActionListener(listener);
+        exit = new JButton("Exit");
+        exit.addActionListener(listener);
+
+        if (last){
+            footer.add(exit);
+        }else{
+            footer.add(next);
+        }
+
 
 
 
@@ -91,8 +106,16 @@ public class DisplayProfile extends JFrame {
 
     }
 
+    public JButton getNext(){
+        return next;
+    }
+
+    public JButton getExit(){
+        return exit;
+    }
+
     public static void main(String[] args){
-        new DisplayProfile();
+        //new DisplayProfile();
     }
 
 }

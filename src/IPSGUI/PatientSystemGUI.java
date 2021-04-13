@@ -1,5 +1,6 @@
 package IPSGUI;
 
+import backend.PatientProf;
 import backend.PatientProfDB;
 
 import javax.swing.*;
@@ -16,12 +17,15 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     CreateProfile createProfile;
     DeleteProfile deleteProfile;
     UpdateProfile updateProfile;
+    DisplayPrompt displayPrompt;
+    DisplayProfile currentDisplayProfile;
 
     public PatientSystemGUI(){
         mainMenu = new MainMenu(this);
         createProfile = new CreateProfile(this);
         deleteProfile = new DeleteProfile(this);
         updateProfile = new UpdateProfile(this);
+        displayPrompt = new DisplayPrompt(this);
 
         startUp();
     }
@@ -60,6 +64,15 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
         }
+        if(e.getSource()==displayPrompt.getSearch()){
+            handleDisplayProfile();
+        }
+        if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getExit()){
+            handleDisplayProfileExit();
+        }
+        if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getNext()){
+            System.out.println("Next selected");
+        }
     }
 
     // Method to handle clicking select in MainMenu
@@ -79,10 +92,29 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
                 updateProfile.setVisible(true);
                 break;
             case "find":
+                mainMenu.setVisible(false);
+                displayPrompt.setVisible(true);
                 break;
             case "displayAll":
                 break;
         }
+    }
+
+    // Method to handle finding and displaying one profile
+    private void handleDisplayProfile(){
+        String[] data = displayPrompt.getData();
+        PatientProf patient = database.findProfile(data[0], data[1]);
+        if (patient != null){
+            displayPrompt.hideScreen();
+            currentDisplayProfile = new DisplayProfile(this, patient, true);
+        }else{
+            new ErrorBox("Patient Could Not Be Found");
+        }
+    }
+
+    private void handleDisplayProfileExit(){
+        currentDisplayProfile.setVisible(false);
+        mainMenu.setVisible(true);
     }
 
     public static void main(String[] args){
