@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 public class CreateProfile extends JFrame {
 
     // Declare all the components that need to be used
-    JPanel header, body, footer;
-    JLabel title, adminID, firstName, lastName, address, phone, coPay, insuType, patientType, mdContact, mdPhone, algType, illType;
-    JTextField adminIDtxt, firstNametxt, lastNametxt, addresstxt, phonetxt, coPaytxt, mdContacttxt, mdPhonetxt;
-    JComboBox insuTypeDrop, patientTypeDrop, algTypeDrop, illTypeDrop;
-    JButton submit;
+    private final JPanel header, body, footer;
+    private final JLabel title, adminID, firstName, lastName, address, phone, coPay, insuType, patientType, mdContact, mdPhone, algType, illType;
+    private final JTextField adminIDtxt, firstNametxt, lastNametxt, addresstxt, phonetxt, coPaytxt, mdContacttxt, mdPhonetxt;
+    private final JComboBox insuTypeDrop, patientTypeDrop, algTypeDrop, illTypeDrop;
+    private final JButton submit;
 
-    public CreateProfile(){
+    public CreateProfile(ActionListener listener){
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
         title = new JLabel("Create Profile", JLabel.CENTER);
@@ -24,10 +24,10 @@ public class CreateProfile extends JFrame {
         body = new JPanel(new GridLayout(12,2,0,5));
 
             // Arrays to hold choices for drop boxes
-        String insuTypes[] = {"Private", "Government"};
-        String patientTypes[] = {"Pediatric", "Adult", "Senior"};
-        String algTypes[] = {"None", "Food", "Medication", "Other"};
-        String illTypes[] = {"None", "CHD", "Diabetes", "Asthma", "Other"};
+        String[] insuTypes = {"Private", "Government"};
+        String[] patientTypes = {"Pediatric", "Adult", "Senior"};
+        String[] algTypes = {"None", "Food", "Medication", "Other"};
+        String[] illTypes = {"None", "CHD", "Diabetes", "Asthma", "Other"};
 
             // Create the labels for each input
         adminID = new JLabel("Admin ID:", JLabel.CENTER);
@@ -86,6 +86,7 @@ public class CreateProfile extends JFrame {
         // Create footer panel
         footer = new JPanel();
         submit = new JButton("Submit");
+        submit.addActionListener(listener);
         footer.add(submit);
 
         // Add different panels and set this frame to visible
@@ -95,13 +96,17 @@ public class CreateProfile extends JFrame {
 
         setSize(400, 800);
         setLayout(new GridLayout(3,0));
-        setVisible(true);
+        //setVisible(true);
 
 
     }
 
+    public JButton getSubmit(){
+        return submit;
+    }
+
     public static void main(String[] args){
-        new CreateProfile();
+        //new CreateProfile();
     }
 }
 

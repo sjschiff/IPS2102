@@ -2,14 +2,15 @@ package IPSGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class DeleteProfile extends JFrame {
-    JPanel header, body, footer;
-    JLabel title, adminID, lastName;
-    JTextField adminIDtxt, lastNametxt;
-    JButton delete;
+    private JPanel header, body, footer;
+    private JLabel title, adminID, lastName;
+    private JTextField adminIDtxt, lastNametxt;
+    private JButton delete;
 
-    public DeleteProfile(){
+    public DeleteProfile(ActionListener listener){
 
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
@@ -37,6 +38,7 @@ public class DeleteProfile extends JFrame {
         // Create footer panel
         footer = new JPanel();
         delete = new JButton("Delete");
+        delete.addActionListener(listener);
         footer.add(delete);
 
         // Add different panels and set this frame to visible
@@ -46,9 +48,8 @@ public class DeleteProfile extends JFrame {
 
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,10));
-        setVisible(true);
+        //setVisible(true);
 
-        new DeleteStatus("Profile Deleted");
     }
 
     // Class to create a pop-up for the status of the delete
@@ -78,8 +79,12 @@ public class DeleteProfile extends JFrame {
         }
     }
 
+    public JButton getDelete(){
+        return delete;
+    }
+
     public static void main(String[] args){
-        new DeleteProfile();
+        //new DeleteProfile();
     }
 
 }

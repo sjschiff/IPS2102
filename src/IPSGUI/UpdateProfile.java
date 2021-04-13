@@ -2,6 +2,7 @@ package IPSGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class UpdateProfile extends JFrame {
 
@@ -11,7 +12,7 @@ public class UpdateProfile extends JFrame {
     JComboBox updateFieldDrop;
     JButton find;
 
-    public UpdateProfile(){
+    public UpdateProfile(ActionListener listener){
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
         title = new JLabel("Update Profile", JLabel.CENTER);
@@ -54,9 +55,8 @@ public class UpdateProfile extends JFrame {
 
         setSize(400, 500);
         setLayout(new GridLayout(3,0,0,10));
-        setVisible(true);
+        //setVisible(true);
 
-        new UpdateInfo("PA2", "Schiffer", "Address");
     }
 
     private class UpdateInfo extends JFrame{
@@ -102,11 +102,11 @@ public class UpdateProfile extends JFrame {
 
             setSize(400, 500);
             setLayout(new GridLayout(3,0,0,10));
-            setVisible(true);
+            //setVisible(true);
         }
     }
 
     public static void main(String[] args){
-        new UpdateProfile();
+        //new UpdateProfile();
     }
 }
