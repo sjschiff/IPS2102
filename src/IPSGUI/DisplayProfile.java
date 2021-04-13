@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// Class to display the data of a Patient Profile
 public class DisplayProfile extends JFrame {
     // Declare all the components that need to be used
     private JPanel header, body, footer;
@@ -15,6 +16,9 @@ public class DisplayProfile extends JFrame {
 
     private JButton next, exit;
 
+    // Constructor to create the display profile window
+    // Takes a listener to handle all the actions, a Patient Profile to display, and a boolean to see if this is the last
+    // profile to be displayed before returning to the main menu
     public DisplayProfile(ActionListener listener, PatientProf profile, boolean last){
         MedCond medCondInfo = profile.getMedCondInfo();
 
@@ -80,6 +84,7 @@ public class DisplayProfile extends JFrame {
         body.add(illTypetxt);
 
         // Create footer panel
+        // Add either a Next Profile button or an Exit button depending on if this is the last profile to be displayed
         footer = new JPanel();
         next = new JButton("Next Profile");
         next.addActionListener(listener);
@@ -92,9 +97,6 @@ public class DisplayProfile extends JFrame {
             footer.add(next);
         }
 
-
-
-
         // Add different panels and set this frame to visible
         add(header);
         add(body);
@@ -106,14 +108,17 @@ public class DisplayProfile extends JFrame {
 
     }
 
+    // Return the JButton object for next
     public JButton getNext(){
         return next;
     }
 
+    // Return the JButton object for exit
     public JButton getExit(){
         return exit;
     }
 
+    // Test main
     public static void main(String[] args){
         //new DisplayProfile();
     }

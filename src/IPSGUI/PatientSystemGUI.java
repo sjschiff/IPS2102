@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-
+// Main GUI class
 public class PatientSystemGUI extends JFrame implements ActionListener {
 
     PatientProfDB database;
@@ -76,6 +76,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     }
 
     // Method to handle clicking select in MainMenu
+    // Gets the selection from the main menu and switches to choose which window to show
     private void handleMainMenu(){
         String selection = mainMenu.getSelction();
         switch (selection){
@@ -101,6 +102,9 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     }
 
     // Method to handle finding and displaying one profile
+    // Gets the data from the displayPrompt and attempts to find the profile
+    // If profile found, create a new DisplayProfile to display the information
+    // If profile not found, create a new ErrorBox saying the patient could not be found
     private void handleDisplayProfile(){
         String[] data = displayPrompt.getData();
         PatientProf patient = database.findProfile(data[0], data[1]);
@@ -112,6 +116,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
     }
 
+    // Handle hitting the exit button from displaying a profile. Returns the user to the main menu.
     private void handleDisplayProfileExit(){
         currentDisplayProfile.setVisible(false);
         mainMenu.setVisible(true);

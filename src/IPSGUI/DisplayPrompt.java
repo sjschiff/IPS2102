@@ -4,13 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// Class to prompt the user for the data needed to find a Patient Profile
 public class DisplayPrompt extends JFrame {
 
+    // Declare each component needed
     private JPanel header, body, footer;
     private JLabel title, adminID, lastName;
     private JTextField adminIDtxt, lastNametxt;
     private JButton search;
 
+    // Constructor to create the DisplayPrompt window
     public DisplayPrompt(ActionListener listener){
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
@@ -21,15 +24,15 @@ public class DisplayPrompt extends JFrame {
         // Create body panel with grid layout for 2 inputs and 2 components per input
         body = new JPanel(new GridLayout(2,2,0,30));
 
-        // Create the labels for each input
+            // Create the labels for each input
         adminID = new JLabel("Admin ID:", JLabel.CENTER);
         lastName = new JLabel("Last Name:", JLabel.CENTER);
 
-        // Create all the areas to input information
+            // Create all the areas to input information
         adminIDtxt = new JTextField();
         lastNametxt = new JTextField();
 
-        // Add each component to the body in order
+            // Add each component to the body in order
         body.add(adminID);
         body.add(adminIDtxt);
         body.add(lastName);
@@ -51,6 +54,7 @@ public class DisplayPrompt extends JFrame {
         //setVisible(true);
     }
 
+    // Returns the JButton object for search
     public JButton getSearch(){
         return search;
     }
@@ -63,6 +67,7 @@ public class DisplayPrompt extends JFrame {
         return data;
     }
 
+    // Method to hide this screen and clear what has been entered in the text fields
     public void hideScreen(){
         setVisible(false);
         adminIDtxt.setText("");
