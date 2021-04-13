@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// Class for deleting a profile from the database
 public class DeleteProfile extends JFrame {
+
+    // Declare all of the components that are needed
     private JPanel header, body, footer;
     private JLabel title, adminID, lastName;
     private JTextField adminIDtxt, lastNametxt;
@@ -52,35 +55,24 @@ public class DeleteProfile extends JFrame {
 
     }
 
-    // Class to create a pop-up for the status of the delete
-    private class DeleteStatus extends JFrame{
-        JLabel title, message;
-        JButton ok;
-
-        public DeleteStatus(String status){
-
-            // Create the title
-            title = new JLabel("Delete Profile", JLabel.CENTER);
-            title.setFont(new Font("Serif", Font.PLAIN, 25));
-
-            // Create the status message
-            message = new JLabel(status, JLabel.CENTER);
-
-            // Create the OK button
-            ok = new JButton("OK");
-
-            add(title);
-            add(message);
-            add(ok);
-
-            setSize(400, 400);
-            setLayout(new GridLayout(3,0,0,10));
-            setVisible(true);
-        }
-    }
-
+    // Returns the JButton object for delete
     public JButton getDelete(){
         return delete;
+    }
+
+    // Method to return the data that the user has entered into the text fields.
+    public String[] getData(){
+        String adminID = adminIDtxt.getText();
+        String lastName = lastNametxt.getText();
+        String[] data = {adminID, lastName};
+        return data;
+    }
+
+    // Method to hide this screen and clear what has been entered in the text fields
+    public void hideScreen(){
+        setVisible(false);
+        adminIDtxt.setText("");
+        lastNametxt.setText("");
     }
 
     public static void main(String[] args){

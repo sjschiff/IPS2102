@@ -16,11 +16,13 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     MainMenu mainMenu;
     CreateProfile createProfile;
     DeleteProfile deleteProfile;
+    DeleteStatus deleteStatus;
     UpdateProfile updateProfile;
     DisplayPrompt displayPrompt;
     DisplayProfile currentDisplayProfile;
     DisplayAllProfiles displayAllProfiles;
     PatientProf curProfile;
+
 
     public PatientSystemGUI(){
         mainMenu = new MainMenu(this);
@@ -69,6 +71,12 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
         if(e.getSource()==createProfile.getSubmit()){
             handleCreateProfile();
+        }
+        if(e.getSource()==deleteProfile.getDelete()){
+            handleDeleteProfile();
+        }
+        if(deleteStatus != null && e.getSource()==deleteStatus.getOK()){
+            handleDeleteOK();
         }
 
         if(e.getSource()==displayPrompt.getSearch()){
@@ -130,6 +138,30 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         catch(RuntimeException e){
             new ErrorBox(e.getMessage());
         }
+    }
+
+    // Method to handle hitting "Delete" in DeleteProfile
+    // Gets the data from the DeleteProfile form and tries to delete the profile from the database
+    // If the deletion succeeds, create a pop up saying the profile was deleted
+    // If the deletion fails, create a pop up saying the profile could not be deleted
+    private void handleDeleteProfile(){
+        String[] data = deleteProfile.getData();
+        String adminID = data[0];
+        String lastName = data[1];
+        if(database.deleteProfile(adminID, lastName)){
+            deleteProfile.hideScreen();
+            deleteStatus = new DeleteStatus(this, "Profile Deleted!");
+        } else{
+            deleteProfile.hideScreen();
+            deleteStatus = new DeleteStatus(this, "Profile Deletion Failed");
+        }
+    }
+
+    // Method to handle hitting OK in the deletion status window
+    // Returns the user to the main menu
+    private void handleDeleteOK(){
+        deleteStatus.setVisible(false);
+        mainMenu.setVisible(true);
     }
 
     // Method to handle finding and displaying one profile
