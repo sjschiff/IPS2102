@@ -543,7 +543,7 @@ public class PatientProfInterface {
     // Creates an instance of the Backend.PatientProfInterface with the database file
     // Then calls the method to get the user's choices
     public static void main(String[] args){
-        PatientProfInterface test = new PatientProfInterface("database.txt");
+        PatientProfInterface test = new PatientProfInterface("testdatabase.txt");
         test.getUserChoice();
     }
 

@@ -70,7 +70,6 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
         }
