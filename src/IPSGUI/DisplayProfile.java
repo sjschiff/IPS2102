@@ -6,6 +6,8 @@ import backend.PatientProf;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Class to display the data of a Patient Profile
 public class DisplayProfile extends JFrame {
@@ -96,6 +98,16 @@ public class DisplayProfile extends JFrame {
         }else{
             footer.add(next);
         }
+
+        // Handle closing this screen
+        JButton exit = new JButton("ExitApp");
+        exit.addActionListener(listener);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit.doClick();
+            }
+        });
 
         // Add different panels and set this frame to visible
         add(header);

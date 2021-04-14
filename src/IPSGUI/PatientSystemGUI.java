@@ -4,8 +4,11 @@ import backend.PatientProf;
 import backend.PatientProfDB;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 // Main GUI class
@@ -67,8 +70,12 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
+        }
+        if(e.getActionCommand().equals("ExitApp")){
+            handleExit();
         }
         if(e.getSource()==createProfile.getSubmit()){
             handleCreateProfile();
@@ -197,7 +204,6 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         String newVal = data[3];
         PatientProf profile = database.findProfile(adminID, lastName);
 
-        // TODO: Error checking in updates for bad inputs
         try {
             switch (uField) {
                 case "Address":
@@ -307,6 +313,14 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
             curProfile = nextProfile;
         }
     }
+
+    // Method to handle exiting from the main menu
+    private void handleExit(){
+        database.writeAllPatientProf(filePath);
+        System.exit(0);
+    }
+
+
 
     public static void main(String[] args){
         new PatientSystemGUI();

@@ -3,6 +3,8 @@ package IPSGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Class for deleting a profile from the database
 public class DeleteProfile extends JFrame {
@@ -43,6 +45,16 @@ public class DeleteProfile extends JFrame {
         delete = new JButton("Delete");
         delete.addActionListener(listener);
         footer.add(delete);
+
+        // Handle closing this screen
+        JButton exit = new JButton("ExitApp");
+        exit.addActionListener(listener);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit.doClick();
+            }
+        });
 
         // Add different panels and set this frame to visible
         add(header);

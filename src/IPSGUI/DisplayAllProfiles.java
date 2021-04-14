@@ -3,6 +3,8 @@ package IPSGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Class to prompt the user for adminID to see all profiles under that ID
 public class DisplayAllProfiles extends JFrame{
@@ -38,14 +40,24 @@ public class DisplayAllProfiles extends JFrame{
         search.addActionListener(listener);
         footer.add(search);
 
-            // Add different panels and set this frame to visible
+        // Handle closing this screen
+        JButton exit = new JButton("ExitApp");
+        exit.addActionListener(listener);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit.doClick();
+            }
+        });
+
+            // Add different panels and set this frame format
         add(header);
         add(body);
         add(footer);
 
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,60));
-        //setVisible(true);
+
     }
 
     // Method to return the JButton object for search

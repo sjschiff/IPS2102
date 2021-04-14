@@ -3,6 +3,8 @@ package IPSGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Class to create a pop-up for the status of the delete
 public class DeleteStatus extends JFrame {
@@ -22,10 +24,22 @@ public class DeleteStatus extends JFrame {
         ok = new JButton("OK");
         ok.addActionListener(listener);
 
+        // Handle closing this screen
+        JButton exit = new JButton("ExitApp");
+        exit.addActionListener(listener);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit.doClick();
+            }
+        });
+
+        // Add components and set this screen to visible
         add(title);
         add(message);
         add(ok);
 
+            // Set screen format
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,10));
         setVisible(true);

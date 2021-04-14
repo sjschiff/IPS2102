@@ -3,6 +3,8 @@ package IPSGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class UpdateInfo extends JFrame {
 
@@ -90,6 +92,16 @@ public class UpdateInfo extends JFrame {
         submit = new JButton("Submit");
         submit.addActionListener(listener);
         footer.add(submit);
+
+        // Handle closing this screen
+        JButton exit = new JButton("ExitApp");
+        exit.addActionListener(listener);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit.doClick();
+            }
+        });
 
         // Add different panels and set this frame to visible
         add(header);
