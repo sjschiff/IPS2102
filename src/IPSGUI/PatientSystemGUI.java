@@ -52,13 +52,20 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
             if (i == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 filePath = file.getPath();
-                try {
-                    database = new PatientProfDB(filePath);
-                    database.initializeDatabase(filePath);
+                database = new PatientProfDB(filePath);
+                // If file is not empty try to load in the data
+                if(file.length() != 0) {
+                    try {
+                        database.initializeDatabase(filePath);
+                        valid = true;
+                        mainMenu.setVisible(true);
+                    } catch (RuntimeException e) {
+                        new ErrorBox(e.getMessage());
+                    }
+                // If empty file, continue without trying to load in data, and write to this file
+                }else{
                     valid = true;
                     mainMenu.setVisible(true);
-                } catch (RuntimeException e){
-                    new ErrorBox(e.getMessage());
                 }
             }
             // Cancel branch
