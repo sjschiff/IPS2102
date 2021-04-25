@@ -8,9 +8,12 @@ import java.awt.event.WindowEvent;
 
 // Class to create a pop-up for the status of the delete
 public class DeleteStatus extends JFrame {
+
+    // Declare all needed components
     private JLabel title, message;
     private JButton ok;
 
+    // Constructor method
     public DeleteStatus(ActionListener listener, String status){
 
         // Create the title

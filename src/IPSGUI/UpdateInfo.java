@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+// Class to create GUI to enter new info that will change PatientProf
 public class UpdateInfo extends JFrame {
 
+    // Declare all needed components
     private String id, lName, uField;
 
     private int componentType;
@@ -18,8 +20,11 @@ public class UpdateInfo extends JFrame {
     private JTextField updateFieldtxt;
     private JComboBox insuTypeDrop, patientTypeDrop, algTypeDrop, illTypeDrop;
 
-    JButton submit;
+    private JButton submit;
 
+    // Constructor method
+    // Takes in an action listener, the admin ID of the patient, the last name of the patient,
+    // and the field to be updated
     public UpdateInfo(ActionListener listener, String id, String lName, String uField){
         this.id = id;
         this.lName = lName;
@@ -36,9 +41,11 @@ public class UpdateInfo extends JFrame {
         title = new JLabel("Update", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 25));
 
+            // Add labels for the Admin ID and the Last Name of the patient
         adminID = new JLabel("Admin ID - " + id, JLabel.CENTER);
         lastName = new JLabel("Last Name - " + lName, JLabel.CENTER);
 
+            // Add all components to the header
         header.add(title);
         header.add(adminID);
         header.add(lastName);
@@ -46,7 +53,7 @@ public class UpdateInfo extends JFrame {
         // Create body panel with grid layout for 1 inputs and 2 components per input
         body = new JPanel(new GridLayout(1,2,0,30));
 
-        // Create label
+        // Create label for the field to be updated
         updateField = new JLabel(uField + ":", JLabel.CENTER);
 
         // Create input options for the different fields
@@ -59,6 +66,7 @@ public class UpdateInfo extends JFrame {
         // add proper components to the body
         body.add(updateField);
 
+        // Depending on which type of field should be updated change the input type
         switch (uField){
             case "Insurance Type":
                 componentType = 0;
@@ -113,6 +121,7 @@ public class UpdateInfo extends JFrame {
         setVisible(true);
     }
 
+    // Method to get the JButton object for submit
     public JButton getSubmit(){
         return submit;
     }
@@ -120,6 +129,9 @@ public class UpdateInfo extends JFrame {
     // Method to return the data that the user has entered into the fields.
     public String[] getData(){
         String newValue;
+        // Get the info from the correct component
+        // 0 -> combination box
+        // 1 -> text box
         if (componentType == 0){
             newValue = (String)comboBox.getSelectedItem();
         }else{

@@ -63,7 +63,7 @@ public class DisplayPrompt extends JFrame {
 
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,10));
-        //setVisible(true);
+
     }
 
     // Returns the JButton object for search
@@ -86,7 +86,4 @@ public class DisplayPrompt extends JFrame {
         lastNametxt.setText("");
     }
 
-    public static void main(String[] args){
-        //new DisplayPrompt();
-    }
 }

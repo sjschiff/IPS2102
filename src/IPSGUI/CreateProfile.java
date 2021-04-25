@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+// Class to create GUI for creating a profile
 public class CreateProfile extends JFrame {
 
     // Declare all the components that need to be used
@@ -18,6 +19,7 @@ public class CreateProfile extends JFrame {
     private final JComboBox insuTypeDrop, patientTypeDrop, algTypeDrop, illTypeDrop;
     private final JButton submit;
 
+    // Constructor method
     public CreateProfile(ActionListener listener){
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
@@ -88,7 +90,7 @@ public class CreateProfile extends JFrame {
         body.add(illType);
         body.add(illTypeDrop);
 
-        // Create footer panel
+        // Create footer panel and add submit button
         footer = new JPanel();
         submit = new JButton("Submit");
         submit.addActionListener(listener);
@@ -104,18 +106,16 @@ public class CreateProfile extends JFrame {
             }
         });
 
-        // Add different panels and set this frame to visible
+        // Add different panels and set the format of this window
         add(header);
         add(body);
         add(footer);
 
         setSize(400, 800);
         setLayout(new GridLayout(3,0));
-        //setVisible(true);
-
-
     }
 
+    // Method to get the submit JButton object
     public JButton getSubmit(){
         return submit;
     }
@@ -178,8 +178,5 @@ public class CreateProfile extends JFrame {
 
     }
 
-    public static void main(String[] args){
-        //new CreateProfile();
-    }
 }
 

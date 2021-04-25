@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-// Class to prompt the user for adminID to see all profiles under that ID
+// Class to create GUI to prompt the user for adminID to see all profiles under that ID
 public class DisplayAllProfiles extends JFrame{
 
     // Declare each component needed
@@ -17,6 +17,7 @@ public class DisplayAllProfiles extends JFrame{
 
     // Constructor to create the displayAllProfiles prompt screen
     public DisplayAllProfiles(ActionListener listener){
+
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
         title = new JLabel("Display All Profiles", JLabel.CENTER);
@@ -75,10 +76,5 @@ public class DisplayAllProfiles extends JFrame{
         setVisible(false);
         adminIDtxt.setText("");
     }
-
-    public static void main(String[] args){
-        //new DisplayAllProfiles();
-    }
-
 
 }

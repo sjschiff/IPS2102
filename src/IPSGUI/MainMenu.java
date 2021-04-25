@@ -3,18 +3,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// Class to create the main menu of the program
 public class MainMenu extends JFrame{
-    //JFrame f;
-
+    // Declare necessary components
     private JLabel title;
     private JRadioButton create, delete, update, find, display;
     private JButton select;
     private ButtonGroup choices;
 
+    // Constructor method
     public MainMenu(ActionListener listener){
+        // Create header and add a title
         title = new JLabel("Integrated Patient System", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 25));
 
+        // Create radio buttons for each possible selection and add a corresponding action command
         create = new JRadioButton("Create Profile");
         create.setActionCommand("create");
         delete = new JRadioButton("Delete Profile");
@@ -26,9 +29,10 @@ public class MainMenu extends JFrame{
         display = new JRadioButton("Display All Profiles");
         display.setActionCommand("displayAll");
 
+        // Create a select button
         select = new JButton("Select");
 
-
+        // Center each button
         create.setHorizontalAlignment(JLabel.CENTER);
         delete.setHorizontalAlignment(JLabel.CENTER);
         update.setHorizontalAlignment(JLabel.CENTER);
@@ -37,6 +41,7 @@ public class MainMenu extends JFrame{
 
         select.setHorizontalAlignment(JLabel.CENTER);
 
+        // Create a button group and add each radio button so that only one of the above can be selected
         choices = new ButtonGroup();
 
         choices.add(create);
@@ -45,6 +50,7 @@ public class MainMenu extends JFrame{
         choices.add(find);
         choices.add(display);
 
+        // Add all components
         add(title);
 
         add(create);
@@ -55,6 +61,7 @@ public class MainMenu extends JFrame{
 
         add(select);
 
+        // Add action listener for select button
         select.addActionListener(listener);
 
         // Handle closing this screen
@@ -70,18 +77,16 @@ public class MainMenu extends JFrame{
         // Set the layout of this screen
         setSize(400, 500);
         setLayout(new GridLayout(7,0));
-        //setVisible(true);
     }
 
+    // Method to get the JButton object for select
     public JButton getSelect(){
         return select;
     }
 
+    // Method to get which button is selected
     public String getSelction(){
         return choices.getSelection().getActionCommand();
     }
 
-    public static void main(String[] args){
-
-    }
 }

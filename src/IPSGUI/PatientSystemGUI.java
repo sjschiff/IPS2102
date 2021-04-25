@@ -14,6 +14,7 @@ import java.io.File;
 // Main GUI class
 public class PatientSystemGUI extends JFrame implements ActionListener {
 
+    // Declare instances of each window and of the database
     PatientProfDB database;
     String filePath;
     MainMenu mainMenu;
@@ -28,6 +29,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     PatientProf curProfile;
 
 
+    // Constructor method, create instances of necessary GUIs and call startUp method to start the program
     public PatientSystemGUI(){
         mainMenu = new MainMenu(this);
         createProfile = new CreateProfile(this);
@@ -75,41 +77,50 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
     }
 
+    // Method to handle all action events
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Branch from select button in Main Menu
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
         }
+        // Branch from exiting from any window
         if(e.getActionCommand().equals("ExitApp")){
             handleExit();
         }
+        // Branch from submit button in Create Profile
         if(e.getSource()==createProfile.getSubmit()){
             handleCreateProfile();
         }
+        // Branch from delete button in Delete Profile
         if(e.getSource()==deleteProfile.getDelete()){
             handleDeleteProfile();
         }
+        // Branch from ok button in the Delete Status window if there is one
         if(deleteStatus != null && e.getSource()==deleteStatus.getOK()){
             handleDeleteOK();
         }
-
+        // Branch from find button in Update Profile prompt screen
         if (e.getSource()==updateProfile.getFind()){
             handleUpdateProfile();
         }
-
+        // Branch from submit button in Update Profile info updating screen
         if (updateInfo != null && e.getSource()==updateInfo.getSubmit()){
             handleUpdateInfo();
         }
-
+        // Branch from search button in Display Profile prompt screen
         if(e.getSource()==displayPrompt.getSearch()){
             handleDisplayProfile();
         }
+        // Branch from search button in Display All Profiles screen
         if(e.getSource()==displayAllProfiles.getSearch()){
             handleDisplayAllProfiles();
         }
+        // Branch from exit button in Display Profile information screen
         if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getExit()){
             handleDisplayProfileExit();
         }
+        // Branch from next button in Display Profile information screen
         if(currentDisplayProfile!= null && e.getSource()==currentDisplayProfile.getNext()){
             handledDisplayProfileNext();
         }
@@ -187,6 +198,8 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     }
 
     // Method to handle hitting find in UpdateProfile
+    // Takes the data from the updateProfile form and tries to find the profile in the database
+    // If the profile can not be found show an error box
     private void handleUpdateProfile(){
         String[] data = updateProfile.getData();
         String adminID = data[0];
@@ -201,6 +214,9 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
     }
 
+    // Method to handle hitting submit in UpdateProfile
+    // Gets the data from the updateInfo object and tries to update the proper field of the PatientProf
+    // If the new data is not allowed, create an error box showing the error
     private void handleUpdateInfo(){
         boolean valid = false;
         String[] data = updateInfo.getData();
@@ -259,8 +275,6 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
             updateInfo.hideScreen();
             mainMenu.setVisible(true);
         }
-
-
     }
 
     // Method to handle finding and displaying one profile
@@ -279,7 +293,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     }
 
     // Method to handle displaying all of the profiles when "Search" is clicked
-    // Gets the adminID that the user and will display all of the patients under that adminID
+    // Gets the adminID that the user inputs and will display all of the patients under that adminID
     // Sends an ErrorBox error message if adminID has no patients
     private void handleDisplayAllProfiles(){
         String adminID = displayAllProfiles.getData();
@@ -300,7 +314,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         }
     }
 
-    // Handle hitting the exit button from displaying a profile. Returns the user to the main menu.
+    // Method to handle hitting the exit button from displaying a profile. Returns the user to the main menu.
     private void handleDisplayProfileExit(){
         currentDisplayProfile.setVisible(false);
         mainMenu.setVisible(true);
@@ -326,8 +340,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         System.exit(0);
     }
 
-
-
+    // Main method to launch the application
     public static void main(String[] args){
         new PatientSystemGUI();
     }

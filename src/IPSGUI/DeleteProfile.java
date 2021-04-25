@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-// Class for deleting a profile from the database
+// Class for creating the GUI for deleting a profile from the database
 public class DeleteProfile extends JFrame {
 
     // Declare all of the components that are needed
@@ -15,6 +15,7 @@ public class DeleteProfile extends JFrame {
     private JTextField adminIDtxt, lastNametxt;
     private JButton delete;
 
+    // Constructor method
     public DeleteProfile(ActionListener listener){
 
         // Create header panel and add the title
@@ -56,14 +57,13 @@ public class DeleteProfile extends JFrame {
             }
         });
 
-        // Add different panels and set this frame to visible
+        // Add different panels and set this frame's format
         add(header);
         add(body);
         add(footer);
 
         setSize(400, 400);
         setLayout(new GridLayout(3,0,0,10));
-        //setVisible(true);
 
     }
 
@@ -85,10 +85,6 @@ public class DeleteProfile extends JFrame {
         setVisible(false);
         adminIDtxt.setText("");
         lastNametxt.setText("");
-    }
-
-    public static void main(String[] args){
-        //new DeleteProfile();
     }
 
 }

@@ -6,14 +6,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+// Class to create GUI to choose which profile and what field to update
 public class UpdateProfile extends JFrame {
-
+    // Declare needed components
     JPanel header, body, footer;
     JLabel title, adminID, lastName, updateField;
     JTextField adminIDtxt, lastNametxt;
     JComboBox updateFieldDrop;
     JButton find;
 
+    // Constructor method
     public UpdateProfile(ActionListener listener){
         // Create header panel and add the title
         header = new JPanel(new GridLayout(1,1));
@@ -93,7 +95,4 @@ public class UpdateProfile extends JFrame {
         updateFieldDrop.setSelectedIndex(0);
     }
 
-    public static void main(String[] args){
-        //new UpdateProfile();
-    }
 }

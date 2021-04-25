@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 
 // Class to display the data of a Patient Profile
 public class DisplayProfile extends JFrame {
+
     // Declare all the components that need to be used
     private JPanel header, body, footer;
     private JLabel title, adminID, firstName, lastName, address, phone, coPay, insuType, patientType, mdContact, mdPhone, algType, illType,
@@ -22,6 +23,7 @@ public class DisplayProfile extends JFrame {
     // Takes a listener to handle all the actions, a Patient Profile to display, and a boolean to see if this is the last
     // profile to be displayed before returning to the main menu
     public DisplayProfile(ActionListener listener, PatientProf profile, boolean last){
+        // Get the medCond object from the profile
         MedCond medCondInfo = profile.getMedCondInfo();
 
         // Create header panel and add the title
@@ -30,10 +32,10 @@ public class DisplayProfile extends JFrame {
         title.setFont(new Font("Serif", Font.PLAIN, 25));
         header.add(title);
 
-        // Create body panel with grid layout for 12 inputs and 2 components per input
+        // Create body panel with grid layout for 12 fields and 2 components per field
         body = new JPanel(new GridLayout(12,2,0,5));
 
-            // Create the labels for each input
+            // Create the labels for each field
         adminID = new JLabel("Admin ID:", JLabel.CENTER);
         adminIDtxt = new JLabel(profile.getadminID(), JLabel.CENTER);
         firstName = new JLabel("First Name:", JLabel.CENTER);
@@ -128,11 +130,6 @@ public class DisplayProfile extends JFrame {
     // Return the JButton object for exit
     public JButton getExit(){
         return exit;
-    }
-
-    // Test main
-    public static void main(String[] args){
-        //new DisplayProfile();
     }
 
 }
