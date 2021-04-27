@@ -344,6 +344,7 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         System.exit(0);
     }
 
+    // Method to handle exiting from any window, returns to the main menu
     private void handleExitWindow(){
         createProfile.hideScreen();
         deleteProfile.hideScreen();
