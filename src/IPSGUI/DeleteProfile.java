@@ -48,7 +48,7 @@ public class DeleteProfile extends JFrame {
         footer.add(delete);
 
         // Handle closing this screen
-        JButton exit = new JButton("ExitApp");
+        JButton exit = new JButton("ExitWindow");
         exit.addActionListener(listener);
         addWindowListener(new WindowAdapter() {
             @Override

@@ -54,7 +54,7 @@ public class UpdateProfile extends JFrame {
         footer.add(find);
 
         // Handle closing this screen
-        JButton exit = new JButton("ExitApp");
+        JButton exit = new JButton("ExitWindow");
         exit.addActionListener(listener);
         addWindowListener(new WindowAdapter() {
             @Override

@@ -102,7 +102,7 @@ public class UpdateInfo extends JFrame {
         footer.add(submit);
 
         // Handle closing this screen
-        JButton exit = new JButton("ExitApp");
+        JButton exit = new JButton("ExitWindow");
         exit.addActionListener(listener);
         addWindowListener(new WindowAdapter() {
             @Override

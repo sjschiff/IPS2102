@@ -84,9 +84,13 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
         if(e.getSource()== mainMenu.getSelect()){
             handleMainMenu();
         }
-        // Branch from exiting from any window
+        // Branch from exiting from MainMenu
         if(e.getActionCommand().equals("ExitApp")){
             handleExit();
+        }
+        // Branch from exiting from any window
+        if(e.getActionCommand().equals("ExitWindow")){
+            handleExitWindow();
         }
         // Branch from submit button in Create Profile
         if(e.getSource()==createProfile.getSubmit()){
@@ -338,6 +342,18 @@ public class PatientSystemGUI extends JFrame implements ActionListener {
     private void handleExit(){
         database.writeAllPatientProf(filePath);
         System.exit(0);
+    }
+
+    private void handleExitWindow(){
+        createProfile.hideScreen();
+        deleteProfile.hideScreen();
+        displayAllProfiles.hideScreen();
+        displayPrompt.hideScreen();
+        if(updateInfo != null) {
+            updateInfo.hideScreen();
+        }
+        updateProfile.hideScreen();
+        mainMenu.setVisible(true);
     }
 
     // Main method to launch the application
